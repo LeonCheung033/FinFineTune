@@ -1,0 +1,86 @@
+[build-system]
+requires = ["setuptools>=64", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "financetuning"
+version = "0.1.0"
+description = "金融领域大语言模型微调框架"
+readme = "README.md"
+license = {file = "LICENSE"}
+authors = [
+    {name = "FinanceTuning Contributors"}
+]
+requires-python = ">=3.10"
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: Apache Software License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+keywords = ["LLM", "fine-tuning", "GRPO", "RLHF", "finance", "NLP"]
+
+dependencies = [
+    "torch>=2.0.0",
+    "transformers>=4.40.0",
+    "accelerate>=0.27.0",
+    "datasets>=2.18.0",
+    "peft>=0.10.0",
+    "trl>=0.8.0",
+    "pyyaml>=6.0.0",
+    "tqdm>=4.66.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0.0",
+    "black>=24.0.0",
+    "isort>=5.13.0",
+    "jupyterlab>=4.0.0",
+]
+train = [
+    "deepspeed>=0.14.0",
+    "vllm>=0.4.0",
+    "flash-attn>=2.5.0",
+]
+quantize = [
+    "gptqmodel>=1.0.0",
+]
+ray = [
+    "ray>=2.9.0",
+]
+all = [
+    "financetuning[dev,train,quantize,ray]",
+]
+
+[project.urls]
+Homepage = "https://github.com/yourusername/financeTuning"
+Documentation = "https://github.com/yourusername/financeTuning#readme"
+Repository = "https://github.com/yourusername/financeTuning"
+
+[project.scripts]
+finance-sft = "src.sft.train:main"
+finance-quantize = "src.quantization.quantize:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.black]
+line-length = 100
+target-version = ["py310", "py311", "py312"]
+include = '\.pyi?$'
+
+[tool.isort]
+profile = "black"
+line_length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = "test_*.py"

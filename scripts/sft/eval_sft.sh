@@ -1,0 +1,1 @@
+python evaluate_model.py --model_path /root/autodl-tmp/目标模型路径 --test_file /root/autodl-tmp/data/sft/deepspeek_sft_dataset_1k.jsonl --batch_size 8 --max_length 1024 --device auto --sample_size 400 --max_new_tokens 1024
