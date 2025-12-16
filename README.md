@@ -30,9 +30,9 @@ FinanceTuning 是一个完整的金融领域大语言模型微调框架，涵盖
 | 模块 | 功能 | 技术栈 |
 |------|------|--------|
 | **SFT 监督微调** | 金融领域知识注入 | LoRA, DeepSpeed, Transformers |
-| **奖励模型训练** | 人类偏好对齐 | 5层质量分级, Ray 分布式推理 |
+| **奖励模型训练** | 人类偏好对齐 | Freeze Tuning (Last 4 Layers), 5层质量分级 |
 | **GRPO 强化学习** | 策略优化 | TRL GRPOTrainer, vLLM |
-| **模型量化** | 高效部署 | GPTQ, INT4, vLLM |
+| **模型量化** | 高效部署 | GPTQ Model, INT4 |
 
 ## 🏗️ 项目架构
 
@@ -43,9 +43,9 @@ financeTuning/
 ├── 📦 src/                     # 源代码
 │   ├── sft/                    # SFT 微调模块
 │   ├── reward_model/           # 奖励模型模块
-│   ├── grpo/                   # GRPO 训练模块
-│   └── quantization/           # 模型量化模块
-├── 📝 scripts/                 # 训练脚本
+│   ├── grpo_financial_tuning/  # GRPO 训练模块
+│   └── gptq_model/             # 模型量化模块
+├── 📝 scripts/                 # SFT 训练脚本
 
 ```
 
@@ -79,16 +79,16 @@ pip install -e .
 
 ```bash
 # 1. SFT 监督微调
-bash scripts/train_sft.sh
+bash scripts/sft/train_sft.sh
 
 # 2. 奖励模型训练
-bash scripts/train_reward_model.sh
+bash src/reward_model/financial_reward_model/scripts/training/run_training.sh
 
 # 3. GRPO 强化学习
-bash scripts/train_grpo.sh
+bash src/grpo_financial_tuning/run_training.sh
 
-# 4. 模型量化
-bash scripts/quantize_model.sh
+# 4. 模型量化 (请先修改脚本中的路径配置)
+python src/gptq_model/quantize_model.py
 ```
 
 ## 📚 文档
