@@ -1,0 +1,45 @@
+{
+  "model": {
+    "model_name": "/shared/DeepSeek-R1-Distill-Qwen-7B_028/best_complete_model_05261653_028",
+    "reward_model_path": "/shared/Skywork-Reward_checkpoint-1000/checkpoint-1000",
+    "lora_model_path": null
+  },
+  "data": {
+    "train_data_path": "/shared/grpo_financial_tuning/data/grpo_prompts_dataset_5k.jsonl",
+    "eval_data_path": "/shared/grpo_financial_tuning/data/eval_prompts_dataset.jsonl",
+    "max_prompt_length": 512,
+    "max_completion_length": 1024
+  },
+  "training": {
+    "learning_rate": 1e-6,
+    "num_train_epochs": 3,
+    "per_device_train_batch_size": 4,
+    "per_device_eval_batch_size": 4,
+    "gradient_accumulation_steps": 4,
+    "warmup_steps": 10,
+    "bf16": true,
+    "gradient_checkpointing": false,
+    "max_grad_norm": 1.0
+  },
+  "grpo": {
+    "num_generations": 4,
+    "temperature": 0.7,
+    "top_p": 0.9,
+    "epsilon": 0.2,
+    "beta": 0.0,
+    "use_liger_loss": true
+  },
+  "output": {
+    "output_dir": "./output/",
+    "logging_steps": 1,
+    "save_steps": 10,
+    "eval_steps": 10,
+    "load_best_model_at_end": true,
+    "save_total_limit": 1
+  },
+  "logging": {
+    "log_level": "INFO",
+    "use_wandb": false,
+    "wandb_project": "grpo-financial-tuning"
+  }
+}
