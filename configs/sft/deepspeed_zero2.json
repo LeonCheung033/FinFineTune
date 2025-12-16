@@ -1,0 +1,27 @@
+{
+    "fp16": {
+        "enabled": true,
+        "initial_scale_power": 12
+    },
+    "zero_optimization": {
+        "stage": 2,
+        "contiguous_gradients": true,
+        "overlap_comm": true,
+        "offload_optimizer": {
+            "device": "cpu",
+            "pin_memory": true
+        }
+    },
+    "gradient_accumulation_steps": "auto",
+    "gradient_clipping": "auto",
+    "steps_per_print": "auto",
+    "train_batch_size": "auto",
+    "train_micro_batch_size_per_gpu": "auto",
+    "wall_clock_breakdown": false,
+    "zero_allow_untested_optimizer": true,
+    "activation_checkpointing": {
+        "partition_activations": true,
+        "cpu_checkpointing": true,
+        "profile": false
+    }
+}
